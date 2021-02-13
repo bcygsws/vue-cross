@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>jsonp实现跨域原理分析</title>
+	</head>
+	<body>
+		<!-- 第一种方案 -->
+		<script type="text/javascript">
+			/**
+			 * jsonp实现跨域的总结：
+			 * 1.jsonp实现跨域和ajax很像，但原理不一样。jsonp是通过<script>标签的动态加载来实现跨域请求，而一般的ajax请求则是通过XMLHttpRequest来实现请求的
+			 * 2.jsonp不是一种标准的协议，其安全性和稳定性都不如W3C推荐的CORS
+			 * 3.jsonp不支持post请求，即使把请求类型设置为post,其本质仍然是get请求
+			 *
+			 *
+			 */
+			function handle(data) {
+				alert(data);
+			}
+		</script>
+		<script type="text/javascript">
+			handle('success');
+		</script>
+
+		<!-- 第二种方案 -->
+		<script type="text/javascript">
+			function handle(data) {
+				alert(data);
+			}
+		</script>
+		<!-- <script type="text/javascript">
+			handle('success');
+		</script> -->
+		<!-- 使用引入外部js文件的方式 -->
+		<!-- TabLine工具的使用 -->
+		<script type="text/javascript" src="./src/js/1.js"></script>
+		<!-- 第三种方案 -->
+		<script type="text/javascript">
+			var script = document.createElement('script');
+			// 设置script标签的src属性
+			script.setAttribute('src', 'http://shanbei.com:8900/api/servername?callback=handle');
+			// 添加到head子标签中去了
+			document.querySelector('head').appendChild(script);
+			function handle(data) {
+				alert(data);
+			}
+		</script>
+		<!-- 第四种方案 使用jquery的jsonp跨域-->
+		<script type="text/javascript">
+			$.ajax({
+				type: 'get',
+				url: 'http://shanbei.com:8900/api/servername',
+				dataType: 'jsonp',
+				// jsonp:'callback',// 传递给服务端回调函数的参数变量名称，如果不设置该项，默认也是callback
+				jsonpCallback: 'handle', // 传递给服务端回调函数名称，如果不设置，则默认是形如"jQuery111007837897759742043_1460657212499"的由jQuery自动生成的函数名称，会自动在$.ajax方法的success中完成调用。
+				success: function (data) {
+					console.log(data);
+				},
+				error: function (failure) {
+					alert(failure);
+				}
+			});
+		</script>
+	</body>
+</html>
