@@ -1,21 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <script type="text/javascript">
-  /**
-   * CORS 跨域资源共享 实现跨域
-   * 参考博客：http://www.ruanyifeng.com/blog/2016/04/cors.html
-   * 文档博客：https://www.cnblogs.com/choon/p/5386150.html
-   * 
-   * 
-   * 
-   */
-  </script>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			/**
+			 * CORS 跨域资源共享 实现跨域
+			 * 参考博客：http://www.ruanyifeng.com/blog/2016/04/cors.html
+			 * 文档博客：https://www.cnblogs.com/choon/p/5386150.html
+			 *
+			 * 一、简单请求：
+			 * 满足以下两个条件：
+			 * 1.请求方式是Head、get、post三者之一
+			 * 2.http的头信息不超出以下字段：
+			 * Accept
+			 * Accept-Language
+			 * Content-Language
+			 * Content-Type  其值只能是(application/x-www-form-urlencoded、text/plain、multipart/form-data三者之一)
+			 * Last-Event-ID
+			 *
+			 * 二、非简单请求
+			 * 凡是不满足上面两个条件的都是非简单请求
+			 *
+			 * CORS对于简单请求和非简单请求处理方式不同
+			 * 简单请求：
+			 * 直接发出cors请求，浏览器会主动添加一个信息头origin，服务器会根据这个头信息的值，来决定是否通过该请求。如果请求的源不在
+			 * 服务器的许可范围内，服务器仍然会回复一个正常的HTTP响应，但是响应头中不包括Access-Control-Allow-Origin
+			 * 如果cors请求在许可的范围内，响应字段中会包含Access-Control-Allow-Origin Access-Control-Allow-Headers
+			 * Access-Control-Allow-Methods Access-Control-Allow-Credentials(不设置，默认值为false,表示发送请求时，cookie不会和请求一起发送给服务器)
+			 *
+			 * 对于非简单请求：
+			 * 非简单请求，在CORS正式通信前，会进行一个预检请求，检查Origin Access-Control-Request-Methods Access-Control-Request-Headers
+			 * 预检通过后，过程与简单请求的流程一致
+			 *
+			 * 预检未通过时，不会含有CORS相关的任何字段
+			 *
+			 *
+			 *
+			 */
+		</script>
+	</body>
 </html>
+·
