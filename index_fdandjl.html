@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>防抖与节流</title>
+	</head>
+	<body>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<p>一身转战三千里，一剑曾当百万师</p>
+		<script>
+			/**
+			 * 定义：
+			 * 防抖：短时间内大量触发的事件，函数在某个时间期限内函数只执行一次
+			 * 节流：短时间内大量触发的事件，函数在一段时间内失效，后经过一定时间后才能够执行（类似游戏中技能冷却时间）
+			 *
+			 */
+			// 以滚动条读取scrollTop的值为例，分别演示防抖和节流
+			function getScrollTop() {
+				var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+				console.log('滚动条距离顶部的距离：' + scrollTop);
+			}
+			// window.onscroll = debounce(getScrollTop, 1000);
+			// 防抖函数
+			// function debounce(fn, delay) {
+			// 	var timer = null;
+			//   // 闭包保持timer的状态，当第一个timer工作时，timer不等于null,此时if(timer)执行当前分支，清除定时器，然后重新开始定时
+			// 	return function () {
+			// 		if (timer) {
+			// 			clearTimeout(timer);
+			// 		}
+			//     // 第一个timer
+			// 		timer = setTimeout(fn, delay);
+			// 	};
+			// }
+			// 节流函数
+			function throttle(fn, delay) {
+				// 定义一个标志位flag,flag为true时，表示scroll滚动事件执行fn的时机；flag为false值，表示事件处理函数处于失效期间
+				var flag = true;
+				return function () {
+					if (!flag) return false;
+					// 此时第一次点击事件，使得定时器处于工作时间
+					flag = false;
+					// 在delay这段时间内，flag仍然还是false值，只有定时结束后，flag才瞬间变为true。此时，也是事件处理函数在失效一段时间后，重新执行
+					setTimeout(() => {
+						getScrollTop();
+						flag = true;
+					}, delay);
+				};
+			}
+			window.onscroll = throttle(getScrollTop, 3000);
+		</script>
+	</body>
+</html>
